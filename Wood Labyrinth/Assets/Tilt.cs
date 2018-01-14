@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,17 +18,29 @@ public class Tilt : MonoBehaviour
     {
         float tiltHorizontal = Input.GetAxis("Horizontal");
         float tiltVertical = Input.GetAxis("Vertical");
-        transform.Rotate(new Vector3(tiltVertical, 0, -tiltHorizontal));
-        /*if(Input.GetButtonDown("Horizontal"))
-        {
-            transform.Rotate(new Vector3(Input.GetAxis, 0, 0) * Time.deltaTime);
-        }
-        if(Input.GetButtonDown("Vertical"))
-        {
-            transform.Rotate(new Vector3(0, 0, 50) * Time.deltaTime);
-        }*/
 
-        // Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        // rb.AddForce(movement * speed);
+		print (transform.localRotation.z);
+		if(transform.localRotation.x > .05 && tiltVertical > 0)
+		{
+			tiltVertical = 0;
+		}
+
+		if (transform.localRotation.x < -.05 && tiltVertical < 0) 
+		{
+			tiltVertical = 0;
+		}
+
+		if(transform.localRotation.z > .05 && tiltHorizontal < 0)
+		{
+			tiltHorizontal = 0;
+
+		}
+		if (transform.localRotation.z < -.05 && tiltHorizontal > 0) {
+			tiltHorizontal = 0;
+		}
+
+        transform.Rotate(new Vector3(tiltVertical, 0, -tiltHorizontal));
+
     }
 }
+
